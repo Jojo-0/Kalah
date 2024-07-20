@@ -7,7 +7,7 @@ public class TitlePanel {
 
     public TitlePanel() {
         this.panel = new JPanel();
-        JLabel titleLabel = new JLabel("Kalah");
+        JLabel titleLabel = new JLabel("Kalaha");
         this.panel.add(titleLabel);
     }
 
