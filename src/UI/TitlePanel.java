@@ -3,7 +3,7 @@ package UI;
 import javax.swing.*;
 
 public class TitlePanel {
-    private JPanel panel;
+    private final JPanel panel;
 
     public TitlePanel() {
         this.panel = new JPanel();

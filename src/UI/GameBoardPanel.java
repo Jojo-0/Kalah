@@ -64,10 +64,21 @@ public class GameBoardPanel {
         return panel;
     }
 
+    public JButton[] getButtons() {
+        return buttons;
+    }
+
     public void updateButtonStoneCount(int index, int stones) {
         if (index < 0 || index >= buttons.length) return;
 
         JButton button = buttons[index];
         button.setText(String.valueOf(stones));
+    }
+
+    public void updateBaseStoneCount(int index, int stones) {
+        if (index != 0 && index !=7) return;
+
+        JButton button = buttons[index];
+        button.setText("Base: \n" + stones);
     }
 }
