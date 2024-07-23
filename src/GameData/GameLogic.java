@@ -1,17 +1,18 @@
 package GameData;
 
-public class GameLogic{
+public class GameLogic {
     private final int[] stones;
     private int scoreP1;
     private int scoreP2;
     private boolean playerOneTurn;
 
     public GameLogic() {
-        stones = new int[12];
-        for (int i = 0; i < 12; i++) {
-            if (i != 0 && i !=7) {
-                stones[i] = 4; // Initial 4 stones in each cell except the bases
-            }
+        stones = new int[14]; // Including the bases at index 0 and 6
+        for (int i = 1; i < 7; i++) {
+            stones[i] = 4; // Initial 4 stones in each cell except the bases
+        }
+        for (int i = 8; i < 14; i++) {
+            stones[i] = 4; // Initial 4 stones in each cell except the bases
         }
         scoreP1 = 0;
         scoreP2 = 0;
@@ -38,7 +39,7 @@ public class GameLogic{
         if (startIndex == 0 || startIndex == 7) {
             return; // Cannot start from a base
         }
-        if ((playerOneTurn && startIndex > 6) || (!playerOneTurn && startIndex < 6)) {
+        if (playerOneTurn && startIndex > 7 || !playerOneTurn && startIndex < 7) {
             return; // Ensure player only picks from their own squares
         }
 
@@ -47,7 +48,7 @@ public class GameLogic{
 
         int index = startIndex;
         while (stonesInHand > 0) {
-            index = (index + 1) % 12;
+            index = (index - 1 + 14) % 14; // Move counterclockwise
             if ((playerOneTurn && index == 7) || (!playerOneTurn && index == 0)) {
                 continue; // Skip the opponent's base
             }
@@ -55,11 +56,14 @@ public class GameLogic{
             stonesInHand--;
         }
 
+        // Update scores
+        updateScores();
+
         // Switch turns
         playerOneTurn = !playerOneTurn;
     }
 
-    public void updateScores() {
+    private void updateScores() {
         scoreP1 = stones[0];
         scoreP2 = stones[7];
     }

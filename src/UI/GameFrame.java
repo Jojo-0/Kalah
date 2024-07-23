@@ -14,19 +14,19 @@ public class GameFrame {
     private final GameLogic gameLogic;
 
     public GameFrame() {
-        gameLogic = new GameLogic();
-
         frame = new JFrame("Game GUI");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600, 400);
+        frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
 
+        gameLogic = new GameLogic();
         titlePanel = new TitlePanel();
         commandPanel = new CommandPanel();
         gameBoardPanel = new GameBoardPanel(this);
         scorePanelP1 = new ScorePanel("Player 1");
         scorePanelP2 = new ScorePanel("Player 2");
 
+        //Add panels to the frame
         frame.add(titlePanel.getPanel(), BorderLayout.NORTH);
         frame.add(gameBoardPanel.getPanel(), BorderLayout.CENTER);
         frame.add(commandPanel.getPanel(), BorderLayout.SOUTH);
@@ -47,15 +47,15 @@ public class GameFrame {
         for (int i = 0; i < 12; i++) {
             gameBoardPanel.updateButtonStoneCount(i, gameLogic.getStones(i));
         }
-        gameBoardPanel.updateBaseStoneCount(0, gameLogic.getScoreP1());
-        gameBoardPanel.updateBaseStoneCount(7, gameLogic.getScoreP2());
+        //gameBoardPanel.updateBaseStoneCount(0, gameLogic.getScoreP1());
+        //gameBoardPanel.updateBaseStoneCount(7, gameLogic.getScoreP2());
         scorePanelP1.updateScore(gameLogic.getScoreP1());
         scorePanelP2.updateScore(gameLogic.getScoreP2());
     }
 
     public void makeMove(int index) {
         gameLogic.makeMove(index);
-        gameLogic.updateScores();
+        //gameLogic.updateScores();
         updateUI();
     }
 
