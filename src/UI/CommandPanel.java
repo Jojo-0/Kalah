@@ -3,7 +3,7 @@ package UI;
 import javax.swing.*;
 
 public class CommandPanel {
-    private JPanel panel;
+    private final JPanel panel;
     private static JTextField commandTextField;
 
     public CommandPanel() {
