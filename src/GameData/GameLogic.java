@@ -56,7 +56,7 @@ public class GameLogic {
             stonesInHand--;
         }
 
-        applyEmptyCellRule(index);
+        //applyEmptyCellRule(index);
         applyLandedInBaseRule(index);
 
         updateScores();
