@@ -30,17 +30,13 @@ public class GameLogic {
     public int getScoreP2() {
         return scoreP2;
     }
-
     public boolean isPlayerOneTurn() {
         return playerOneTurn;
     }
 
     public void makeMove(int startIndex) {
-        if (startIndex == 0 || startIndex == 7) {
+        if (!isValidMove(startIndex)) {
             return; // Cannot start from a base
-        }
-        if ((playerOneTurn && startIndex > 6) || (!playerOneTurn && startIndex < 7)) {
-            return; // Ensure player only picks from their own squares
         }
 
         int stonesInHand = stones[startIndex];
@@ -49,20 +45,46 @@ public class GameLogic {
 
         while (stonesInHand > 0) {
             index = (index - 1 + 14) % 14; // Move counterclockwise
-            if ((playerOneTurn && index == 7) || (!playerOneTurn && index == 0)) {
+            if (isOpponentBase(index)) {
                 continue; // Skip the opponent's base
             }
             stones[index]++;
             stonesInHand--;
         }
 
-        //applyEmptyCellRule(index);
+        applyEmptyCellRule(index);
         applyLandedInBaseRule(index);
 
         updateScores();
     }
 
+    private boolean isValidMove(int startIndex) {
+        if (startIndex == 0 || startIndex == 7) {
+            return false;
+        }
+        return (playerOneTurn && startIndex > 6) || (!playerOneTurn && startIndex < 7);
+    }
 
+    private boolean isOpponentBase(int index) {
+        return (playerOneTurn && index == 0) || (!playerOneTurn && index == 7);
+    }
+
+    private void applyEmptyCellRule(int index){
+        boolean lastStoneInEmptyOwnCell = stones[index] == 1 && ((playerOneTurn && index <7) || (!playerOneTurn && index > 7));
+        boolean oppositeCellFull = stones[14 - index - 1] > 0;
+
+        if (lastStoneInEmptyOwnCell && oppositeCellFull) {
+            int oppositeIndex = 14 - index -1;
+            if (playerOneTurn){
+                scoreP1 += stones[oppositeIndex] + stones[index];
+            } else {
+                scoreP2 += stones[oppositeIndex] + stones[index];
+            }
+            stones[oppositeIndex] = 0;
+            stones[index] = 0;
+        }
+
+    }
 
         // Player gets another turn, if the last stone lands in their base
     private void applyLandedInBaseRule(int index){
@@ -75,6 +97,22 @@ public class GameLogic {
     private void updateScores() {
         scoreP1 = stones[0];
         scoreP2 = stones[7];
+    }
+    //Setter methods for testing
+    public void setStones(int index, int count) {
+        stones[index] = count;
+    }
+
+    public void setScoreP1(int score) {
+        scoreP1 = score;
+    }
+
+    public void setScoreP2(int score) {
+        scoreP2 = score;
+    }
+
+    public void setPlayerOneTurn(boolean turn) {
+        playerOneTurn = turn;
     }
 }
 
