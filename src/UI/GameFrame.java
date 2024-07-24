@@ -47,8 +47,7 @@ public class GameFrame {
         for (int i = 0; i < 14; i++) {
             gameBoardPanel.updateButtonStoneCount(i, gameLogic.getStones(i));
         }
-        //gameBoardPanel.updateBaseStoneCount(0, gameLogic.getScoreP1());
-        //gameBoardPanel.updateBaseStoneCount(7, gameLogic.getScoreP2());
+
         scorePanelP1.updateScore(gameLogic.getScoreP1());
         scorePanelP2.updateScore(gameLogic.getScoreP2());
     }

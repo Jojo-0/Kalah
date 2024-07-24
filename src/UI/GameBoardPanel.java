@@ -67,9 +67,4 @@ public class GameBoardPanel {
         button.setText(String.valueOf(stones));
     }
 
-    public void updateBaseStoneCount(int index, int stones) {
-        if (index != 0 && index != 7) return;
-        JButton button = buttons[index];
-        button.setText("Base: " + stones);
-    }
 }
