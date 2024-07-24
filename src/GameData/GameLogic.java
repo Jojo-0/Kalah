@@ -45,8 +45,8 @@ public class GameLogic {
 
         int stonesInHand = stones[startIndex];
         stones[startIndex] = 0;
-
         int index = startIndex;
+
         while (stonesInHand > 0) {
             index = (index - 1 + 14) % 14; // Move counterclockwise
             if ((playerOneTurn && index == 7) || (!playerOneTurn && index == 0)) {
@@ -56,11 +56,20 @@ public class GameLogic {
             stonesInHand--;
         }
 
-        // Update scores
-        updateScores();
+        applyEmptyCellRule(index);
+        applyLandedInBaseRule(index);
 
-        // Switch turns
-        playerOneTurn = !playerOneTurn;
+        updateScores();
+    }
+
+
+
+        // Player gets another turn, if the last stone lands in their base
+    private void applyLandedInBaseRule(int index){
+        boolean landedInOwnBase = (playerOneTurn && index == 0) || (!playerOneTurn && index == 7);
+        if (!landedInOwnBase) {
+            playerOneTurn = !playerOneTurn;
+        }
     }
 
     private void updateScores() {
