@@ -7,7 +7,7 @@ public class GameLogic {
     private boolean playerOneTurn;
 
     public GameLogic() {
-        stones = new int[14]; // Including the bases at index 0 and 6
+        stones = new int[14]; // Including the bases at index 0 and 7
         for (int i = 1; i < 7; i++) {
             stones[i] = 4; // Initial 4 stones in each cell except the bases
         }
@@ -39,7 +39,7 @@ public class GameLogic {
         if (startIndex == 0 || startIndex == 7) {
             return; // Cannot start from a base
         }
-        if (playerOneTurn && startIndex > 7 || !playerOneTurn && startIndex < 7) {
+        if ((playerOneTurn && startIndex > 6) || (!playerOneTurn && startIndex < 7)) {
             return; // Ensure player only picks from their own squares
         }
 
