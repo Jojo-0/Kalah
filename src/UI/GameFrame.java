@@ -14,10 +14,13 @@ public class GameFrame {
     private final GameLogic gameLogic;
 
     public GameFrame() {
-        frame = new JFrame("Game GUI");
+        frame = new JFrame("Das Bohnenspiel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
+        frame.setLocationRelativeTo(null);
+        frame.setBackground(new Color(238,216,174));//238,216,174
+        //frame.setBackground(Color.BLACK);
 
         gameLogic = new GameLogic();
         titlePanel = new TitlePanel();
@@ -63,3 +66,4 @@ public class GameFrame {
     }
 }
 
+// background: wheat2 (#EED8AE); Player one: Forestgreen(#228B22); Player 2: red4(#8b0000)

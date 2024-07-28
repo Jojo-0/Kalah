@@ -36,9 +36,9 @@ public class GameLogic {
         return scoreP2;
     }
 
-    public boolean isPlayerOneTurn() {
+    /*public boolean isPlayerOneTurn() {
         return playerOneTurn;
-    }
+    }*/
 
     public void makeMove(int startIndex) {
         if (!isValidMove(startIndex)) {
@@ -83,9 +83,9 @@ public class GameLogic {
         if (lastStoneInEmptyOwnCell && oppositeCellFull) {
 
             if (playerOneTurn){
-                scoreP1 += stones[oppositeIndex];
+                stones[0] += stones[oppositeIndex];
             } else {
-                scoreP2 += stones[oppositeIndex];
+                stones[7] += stones[oppositeIndex];
             }
             stones[oppositeIndex] = 0;
         }

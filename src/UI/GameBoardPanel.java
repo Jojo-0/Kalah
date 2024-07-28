@@ -23,6 +23,7 @@ public class GameBoardPanel {
             String buttonLabel = (i == 0 || i == 7) ? "Base" : "4"; // Bases or initial 4 stones
             JButton button = new JButton(buttonLabel);
             button.addActionListener(new GameActionListener(gameFrame));
+            //button.setBackground(new Color(34,139,34));
             buttons[i] = button; // Store reference to the button
 
             if (i == 0) { // Base of player 1
@@ -30,24 +31,28 @@ public class GameBoardPanel {
                 gbc.gridy = 0;
                 gbc.gridwidth = 1;
                 gbc.gridheight = 2; // Span 2 rows
+                button.setBackground(new Color(34,139,34));
                 panel.add(button, gbc);
             } else if (i == 7) { // Base of player 2
                 gbc.gridx = 7;
                 gbc.gridy = 0;
                 gbc.gridwidth = 1;
                 gbc.gridheight = 2; // Span 2 rows
+                button.setBackground(new Color(139,0,0));
                 panel.add(button, gbc);
             } else if (i < 7) { // Top row cells (indexes 1 to 6)
                 gbc.gridx = i;
                 gbc.gridy = 0;
                 gbc.gridwidth = 1;
                 gbc.gridheight = 1;
+                button.setBackground(new Color(34,139,34));
                 panel.add(button, gbc);
             } else { // Bottom row cells (indexes 8 to 13) from right to left
                 gbc.gridx = 14 - i; // Shift index for bottom row from right to left
                 gbc.gridy = 1;
                 gbc.gridwidth = 1;
                 gbc.gridheight = 1;
+                button.setBackground(new Color(139,0,0));
                 panel.add(button, gbc);
             }
         }
