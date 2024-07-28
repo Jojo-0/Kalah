@@ -12,7 +12,7 @@ public class GameFrame {
     private final ScorePanel scorePanelP1;
     private final ScorePanel scorePanelP2;
     private final GameLogic gameLogic;
-
+    private final Color Gamebackground = new Color(238,216,174);
     public GameFrame() {
         frame = new JFrame("Das Bohnenspiel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,6 +29,18 @@ public class GameFrame {
         scorePanelP1 = new ScorePanel("Player 1");
         scorePanelP2 = new ScorePanel("Player 2");
 
+        setGamebackground(titlePanel.getPanel());
+        setGamebackground(commandPanel.getPanel());
+        setGamebackground(scorePanelP1.getPanel());
+        setGamebackground(scorePanelP2.getPanel());
+
+        // Set preferred sizes for the panels
+        titlePanel.getPanel().setPreferredSize(new Dimension(800, 130)); // Height 100 for the North region
+        commandPanel.getPanel().setPreferredSize(new Dimension(800, 100)); // Height 50 for the South region
+        scorePanelP1.getPanel().setPreferredSize(new Dimension(170, 600)); // Width 150 for the West region
+        scorePanelP2.getPanel().setPreferredSize(new Dimension(170, 600)); // Width 150 for the East region
+
+
         //Add panels to the frame
         frame.add(titlePanel.getPanel(), BorderLayout.NORTH);
         frame.add(gameBoardPanel.getPanel(), BorderLayout.CENTER);
@@ -40,6 +52,10 @@ public class GameFrame {
     public void show() {
         frame.setVisible(true);
         updateUI();
+    }
+
+    private void setGamebackground(JPanel panel) {
+        panel.setBackground(Gamebackground);
     }
 
     public void setCommandText(String text) {
