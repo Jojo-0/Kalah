@@ -14,6 +14,8 @@ public class ScorePanel {
         JLabel label = new JLabel(playerName);
         label.setFont(new Font("Serif", Font.PLAIN, 18)); // Increase the font size
         scoreLabel = new JLabel("0"); // Initial score is 0
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        scoreLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(label, BorderLayout.NORTH);
         panel.add(scoreLabel, BorderLayout.SOUTH);
 

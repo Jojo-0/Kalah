@@ -6,6 +6,8 @@ public class GameLogicTest {
     public static void main(String[] args) {
         GameLogic gameLogic = getGameLogic();
 
+        gameLogic.setPlayerOneTurn(true);
+
         // Simulate move
         int startIndex = 3; // Starting index
         gameLogic.makeMove(startIndex);
@@ -39,5 +41,6 @@ public class GameLogicTest {
         gameLogic.setStones(13, 4); // End of Player 2's side
         return gameLogic;
     }
+
 }
 

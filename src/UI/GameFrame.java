@@ -1,10 +1,11 @@
 package UI;
+
 import GameData.GameLogic;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class GameFrame {
+public class GameFrame implements GameGui {
     private final JFrame frame;
     private final TitlePanel titlePanel;
     private final GameBoardPanel gameBoardPanel;
@@ -13,6 +14,7 @@ public class GameFrame {
     private final ScorePanel scorePanelP2;
     private final GameLogic gameLogic;
     private final Color Gamebackground = new Color(238,216,174);
+
     public GameFrame() {
         frame = new JFrame("Das Bohnenspiel");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,10 +60,12 @@ public class GameFrame {
         panel.setBackground(Gamebackground);
     }
 
+    @Override
     public void setCommandText(String text) {
         commandPanel.setCommandText(text);
     }
 
+    @Override
     public void updateUI() {
         for (int i = 0; i < 14; i++) {
             gameBoardPanel.updateButtonStoneCount(i, gameLogic.getStones(i));
@@ -71,14 +75,28 @@ public class GameFrame {
         scorePanelP2.updateScore(gameLogic.getScoreP2());
     }
 
+    @Override
     public void makeMove(int index) {
         gameLogic.makeMove(index);
-        //gameLogic.updateScores();
+        gameLogic.updateScores();
         updateUI();
+
+        if(gameLogic.isGameOver()){
+            setCommandText(gameLogic.getWinner());
+        }
     }
 
     public GameBoardPanel getGameBoardPanel() {
         return gameBoardPanel;
+    }
+
+    public GameLogic getGameLogic() {
+        return gameLogic;
+    }
+
+    @Override
+    public void displayWinner(String winner) {
+        CommandPanel.setCommandText(winner);
     }
 }
 

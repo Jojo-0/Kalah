@@ -19,7 +19,7 @@ public class CommandPanel {
         return panel;
     }
 
-    public void setCommandText(String text) {
+    public static void setCommandText(String text) {
         commandTextField.setText(text);
     }
 }

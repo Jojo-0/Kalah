@@ -8,12 +8,6 @@ public class GameLogic {
 
     public GameLogic() {
         stones = new int[14]; // Including the bases at index 0 and 7
-        /*for (int i = 1; i < 7; i++) {
-            stones[i] = 4; // Initial 4 stones in each cell except the bases
-        }
-        for (int i = 8; i < 14; i++) {
-            stones[i] = 4; // Initial 4 stones in each cell except the bases
-        }*/
         for (int i = 0; i < 14; i++) {
             if (i != 0 && i != 7) {
                 stones[i] = 4; // Initial 4 stones in each cell except the bases
@@ -61,7 +55,12 @@ public class GameLogic {
         applyEmptyCellRule(index);
         applyLandedInBaseRule(index);
 
-        //updateScores();
+        if (!isGameOver()) {
+            playerOneTurn = !playerOneTurn; // Switch turns only if game is not over
+        } else {
+            collectRemainingStones();
+        }
+        updateScores();
     }
 
     private boolean isValidMove(int startIndex) {
@@ -100,13 +99,59 @@ public class GameLogic {
         }
     }
 
-   /* private void updateScores() {
+    public boolean isGameOver() {
+        boolean playerOneEmpty = true;
+        boolean playerTwoEmpty = true;
+
+        for (int i = 1; i < 7; i++) {
+            if (stones[i] > 0) {
+                playerOneEmpty = false;
+            }
+            if (stones[i + 7] > 0) {
+                playerTwoEmpty = false;
+            }
+        }
+        return playerOneEmpty || playerTwoEmpty;
+    }
+
+    private void collectRemainingStones(){
+        for (int i = 1; i < 7; i++) {
+            scoreP1 += stones[i];
+            stones[i] = 0;
+            scoreP2 += stones[i+7];
+            stones[i+7] = 0;
+        }
+    }
+
+    public String getWinner(){
+        if(isGameOver()){
+            collectRemainingStones();
+            if (scoreP1 > scoreP2) {
+                return "P1 wins with " + scoreP1 + " point!";
+            }
+            else if (scoreP1 < scoreP2) {
+                return "P2 wins with " + scoreP2 + " point!";
+            }
+            else {
+                return "Draw";
+            }
+
+        }
+        return "";
+
+    }
+
+   public void updateScores() {
         scoreP1 = stones[0];
         scoreP2 = stones[7];
-    }*/
+    }
     //Setter methods for testing
     public void setStones(int index, int count) {
         stones[index] = count;
+    }
+
+    public void setPlayerOneTurn(boolean playerOneTurn) {
+        this.playerOneTurn = playerOneTurn;
     }
 
 
