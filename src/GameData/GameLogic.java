@@ -53,10 +53,12 @@ public class GameLogic {
         }
 
         applyEmptyCellRule(index);
-        applyLandedInBaseRule(index);
+        final boolean isDoubleMove = applyLandedInBaseRule(index);
 
         if (!isGameOver()) {
-            playerOneTurn = !playerOneTurn; // Switch turns only if game is not over
+            if (!isDoubleMove) {
+                playerOneTurn = !playerOneTurn; // Switch turns only if game is not over
+            }
         } else {
             collectRemainingStones();
         }
@@ -74,7 +76,10 @@ public class GameLogic {
         return (playerOneTurn && index == 7) || (!playerOneTurn && index == 0);
     }
 
-    private void applyEmptyCellRule(int index){
+    private void applyEmptyCellRule(int index) {
+        if (index == 0 || index == 7) {
+            return; // don't apply rule to bases
+        }
         boolean lastStoneInEmptyOwnCell = stones[index] == 1 && ((playerOneTurn && index <7 && index !=0) || (!playerOneTurn && index >7));
         int oppositeIndex = 14 - index;
         boolean oppositeCellFull = stones[oppositeIndex] > 0;
@@ -92,11 +97,9 @@ public class GameLogic {
     }
 
         // Player gets another turn, if the last stone lands in their base
-    private void applyLandedInBaseRule(int index){
+    private boolean applyLandedInBaseRule(int index){
         boolean landedInOwnBase = (playerOneTurn && index == 0) || (!playerOneTurn && index == 7);
-        if (!landedInOwnBase) {
-            playerOneTurn = !playerOneTurn;
-        }
+        return landedInOwnBase;
     }
 
     public boolean isGameOver() {
