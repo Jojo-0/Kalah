@@ -5,7 +5,8 @@ import Test.Setup.ITestResult;
 import Test.Setup.Test;
 
 public class GameLogicTest {
-    public static void main(String[] args) {
+    @Test(name = "moveEndsInBase", order = 0)
+    public void moveEndsInBase(ITestResult resolve) {
         GameLogic gameLogic = getGameLogic();
 
         gameLogic.setPlayerOneTurn(true);
@@ -18,6 +19,11 @@ public class GameLogicTest {
         } catch (Exception e) {
             resolve.returnResult(false);
         }
+    }
+
+    @Test(name = "dummyTest", order = 1)
+    public void dummyTest(ITestResult resolve) {
+        resolve.returnResult(false);
     }
 
     private static GameLogic getGameLogic() {
