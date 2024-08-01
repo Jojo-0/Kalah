@@ -44,7 +44,7 @@ public class GameLogicTest {
         GameLogic gameLogic = getGameLogic();
         if (gameLogic.isGameOver()) {
             String winner = gameLogic.getWinner();
-            resolve.returnResult("P1 wins with 20 point!".equals(winner));
+            resolve.returnResult("P1 wins with 20 points!".equals(winner));
         } else {
             resolve.returnResult(false);
         }
