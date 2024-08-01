@@ -129,10 +129,10 @@ public class GameLogic {
         if(isGameOver()){
             collectRemainingStones();
             if (scoreP1 > scoreP2) {
-                return "P1 wins with " + scoreP1 + " point!";
+                return "P1 wins with " + scoreP1 + " points!";
             }
             else if (scoreP1 < scoreP2) {
-                return "P2 wins with " + scoreP2 + " point!";
+                return "P2 wins with " + scoreP2 + " points!";
             }
             else {
                 return "Draw";
@@ -157,6 +157,13 @@ public class GameLogic {
     }
 
 
+    public void setScoreP1(int i) {
+        this.scoreP1 = i;
+    }
+
+    public void setScoreP2(int i) {
+        this.scoreP2 = i;
+    }
 }
 
 
