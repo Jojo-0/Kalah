@@ -30,9 +30,9 @@ public class GameLogic {
         return scoreP2;
     }
 
-    /*public boolean isPlayerOneTurn() {
+    public boolean isPlayerOneTurn() {
         return playerOneTurn;
-    }*/
+    }
 
     public void makeMove(int startIndex) {
         if (!isValidMove(startIndex)) {
@@ -80,7 +80,7 @@ public class GameLogic {
         if (index == 0 || index == 7) {
             return; // don't apply rule to bases
         }
-        boolean lastStoneInEmptyOwnCell = stones[index] == 1 && ((playerOneTurn && index <7 && index !=0) || (!playerOneTurn && index >7));
+        boolean lastStoneInEmptyOwnCell = stones[index] == 1 && ((playerOneTurn && index <7 ) || (!playerOneTurn && index >7));
         int oppositeIndex = 14 - index;
         boolean oppositeCellFull = stones[oppositeIndex] > 0;
 
@@ -98,8 +98,7 @@ public class GameLogic {
 
         // Player gets another turn, if the last stone lands in their base
     private boolean applyLandedInBaseRule(int index){
-        boolean landedInOwnBase = (playerOneTurn && index == 0) || (!playerOneTurn && index == 7);
-        return landedInOwnBase;
+        return (playerOneTurn && index == 0) || (!playerOneTurn && index == 7);
     }
 
     public boolean isGameOver() {

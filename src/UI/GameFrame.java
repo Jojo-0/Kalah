@@ -7,9 +7,7 @@ import java.awt.*;
 
 public class GameFrame implements GameGui {
     private final JFrame frame;
-    private final TitlePanel titlePanel;
     private final GameBoardPanel gameBoardPanel;
-    private final CommandPanel commandPanel;
     private final ScorePanel scorePanelP1;
     private final ScorePanel scorePanelP2;
     private final GameLogic gameLogic;
@@ -24,9 +22,10 @@ public class GameFrame implements GameGui {
         frame.setBackground(new Color(238,216,174));//238,216,174
         //frame.setBackground(Color.BLACK);
 
+        CommandPanel commandPanel = new CommandPanel();
+        TitlePanel titlePanel = new TitlePanel();
+
         gameLogic = new GameLogic();
-        titlePanel = new TitlePanel();
-        commandPanel = new CommandPanel();
         gameBoardPanel = new GameBoardPanel(this);
         scorePanelP1 = new ScorePanel("Player 1");
         scorePanelP2 = new ScorePanel("Player 2");
@@ -62,7 +61,7 @@ public class GameFrame implements GameGui {
 
     @Override
     public void setCommandText(String text) {
-        commandPanel.setCommandText(text);
+        CommandPanel.setCommandText(text);
     }
 
     @Override
@@ -73,6 +72,7 @@ public class GameFrame implements GameGui {
 
         scorePanelP1.updateScore(gameLogic.getScoreP1());
         scorePanelP2.updateScore(gameLogic.getScoreP2());
+        updateTurnMessage();
     }
 
     @Override
@@ -86,10 +86,12 @@ public class GameFrame implements GameGui {
         }
     }
 
+    //@Override
     public GameBoardPanel getGameBoardPanel() {
         return gameBoardPanel;
     }
 
+    @Override
     public GameLogic getGameLogic() {
         return gameLogic;
     }
@@ -97,6 +99,12 @@ public class GameFrame implements GameGui {
     @Override
     public void displayWinner(String winner) {
         CommandPanel.setCommandText(winner);
+    }
+
+    @Override
+    public void updateTurnMessage() {
+        String turnMessage = gameLogic.isPlayerOneTurn() ? "It is player 1's turn" : "It is player 2's turn";
+        setCommandText(turnMessage);
     }
 }
 

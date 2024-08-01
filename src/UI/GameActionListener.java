@@ -42,6 +42,14 @@ public class GameActionListener implements ActionListener {
             gameGui.setCommandText("Cannot start from a base!");
             return false;
         }
+        if (gameGui.getGameLogic().isPlayerOneTurn() && index > 6) {
+            gameGui.setCommandText("Player 1 cannot start from Player 2's side!");
+            return false;
+        }
+        if (!gameGui.getGameLogic().isPlayerOneTurn() && index < 7) {
+            gameGui.setCommandText("Player 2 cannot start from Player 1's side!");
+            return false;
+        }
         return true;
     }
 
